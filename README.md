@@ -1,4 +1,4 @@
-# Welcome to Rick And Rick And Morty App :wave:
+# Welcome to Rick And Morty App :wave:
 
 ## Description
 Thanks to visit my Github! In this project, i used Typescript. This project is created with NEXTJS, TAILWIND, TS. 
