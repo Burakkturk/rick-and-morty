@@ -2,7 +2,7 @@
 
 ## Description
 Thanks to visit my Github! In this project, i used Typescript. This project is created with NEXTJS, TAILWIND, TS. 
-Project aims to create a Todo App. 
+Project aims to create a Rick And Morty App. 
 
 ## Output
 
