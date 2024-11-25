@@ -1,54 +1,38 @@
-'use client';
-
+import RouterBackBtn from "@/app/components/RouterBackBtn";
+import Image from "next/image";
 import Link from "next/link";
-import { Suspense, useState } from "react";
-import Cards from "./cards";
-import data from "../data.json";
 
-export interface Character {
-  id: number;
-  name: string;
-  status: string;
-  origin: {
-    name: string;
-  };
-  location: {
-    name: string;
-  };
-}
+type Props = {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 
-const CharactersPage = async () => {
-  // const [selectedCharacter, setSelectedCharacter] = useState('')
-  // const response = await fetch("https://rickandmortyapi.com/api/character");
-  // const data = await response.json();
+const CharacterDetailsPage = async ({ params }: Props) => {
+  const { id } = params;
+  const response = await fetch(
+    `https://rickandmortyapi.com/api/character/${id}`
+  );
+  const data = await response.json();
+  const character = data;
 
-  // const characters: Character[] = data.results;
-  const characters: Character[] = data;
-
-  const getFilteredData = async () => {
-
-  };
-
+  if (!response.ok) {
+    return <p>Something went wrong 😭</p>;
+  }
   return (
-    <>
+    <main>
       <Link href={"/"}>HOME</Link>
-      <h1>Rick & Morty Characters</h1>
-      <p>Click a name for details about the character</p>
-
-      <input type="text" />
-      <select onChange={(e) => setSelectedCharacter(e.target.value)}>
-        <option value="table1">table1</option>
-        <option value="table2">table2</option>
-        <option value="table3">table3</option>
-      </select>
-      <button onClick={getFilteredData}>Filter</button>
-      
-
-      <Suspense fallback={<p>Characters are loading</p>}>
-        <Cards characters={characters} />
-      </Suspense>
-    </>
+      <h1>Details about {character.name}</h1>
+      <Image
+        src={character.image}
+        alt={character.name}
+        width={300}
+        height={300}
+      />
+      <p>Status: {character.status}</p>
+      <p>Origin: {character.origin.name}</p>
+      <RouterBackBtn />
+    </main>
   );
 };
 
-export default CharactersPage;
+export default CharacterDetailsPage;
